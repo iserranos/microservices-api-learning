@@ -11,18 +11,16 @@ import static org.springframework.hateoas.jaxrs.JaxRsLinkBuilder.linkTo;
 @RequestMapping(value = "/customer", produces = {"application/json"})
 public class CustomerController {
 
-    private final CustomerServiceImpl customerServiceImpl;
-
     @Autowired
-    public CustomerController(CustomerServiceImpl customerServiceImpl) {
-        this.customerServiceImpl = customerServiceImpl;
-    }
+    private  CustomerServiceImpl customerServiceImpl;
+
+
 
     @GetMapping("/{id}")
     public Customer getCustomerById(@PathVariable String id) {
         Customer customer = customerServiceImpl.getById(id);
         // TODO check customer != null
-        customer.add(linkTo(CustomerController.class).slash(customer.getCustomerId()).withSelfRel());
+//        customer.add(linkTo(CustomerController.class).slash(customer.getCustomerId()).withSelfRel());
         return customer;
     }
 

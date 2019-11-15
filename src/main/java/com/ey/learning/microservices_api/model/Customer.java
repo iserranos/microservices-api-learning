@@ -15,4 +15,15 @@ public class Customer extends ResourceSupport {
     private String lastName;
     private String company;
 
+    public Customer(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Customer[id=%s, firstName='%s', lastName='%s']",
+                customerId, firstName, lastName);
+    }
 }
