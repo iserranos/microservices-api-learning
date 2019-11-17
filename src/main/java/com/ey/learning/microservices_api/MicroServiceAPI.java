@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.dao.DuplicateKeyException;
 
 @SpringBootApplication
 public class MicroServiceAPI implements CommandLineRunner {
 
-    /*
-    Intentando visulizar los datos de mongo en localhost:8080sin existo
-    */
+
     @Autowired
     private CustomerRepository repository;
     public static void main(String[] args) {
@@ -22,8 +21,14 @@ public class MicroServiceAPI implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         repository.deleteAll();
-        repository.save(new Customer("Guillermo", "Crespo"));
-       repository.save(new Customer("Guillermo","Crespo"));
+        /*try {
+
+        }catch (DuplicateKeyException e){
+            toString();
+        }*/
+            repository.save(new Customer("Guillermo", "Crespo", "EY"));
+            repository.save(new Customer("Guillermo", "Crespo", "Google"));
+
 
 
     }

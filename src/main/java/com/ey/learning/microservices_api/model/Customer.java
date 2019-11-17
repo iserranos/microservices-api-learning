@@ -5,19 +5,23 @@ import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
 import org.springframework.hateoas.ResourceSupport;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
-public class Customer extends ResourceSupport {
 
+@Data
+public class Customer {
     @Id
     private String customerId;
     private String firstName;
     private String lastName;
     private String company;
 
-    public Customer(String firstName, String lastName) {
+    public Customer(String firstName, String lastName, String company) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.company = company;
+    }
+
+    public Customer() {
+
     }
 
     @Override

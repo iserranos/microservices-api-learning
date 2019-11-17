@@ -6,6 +6,8 @@ import com.ey.learning.microservices_api.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,24 +26,36 @@ public class CustomerServiceImpl implements CustomerService {
         Optional<Customer> optionalCustomer = customerRepository.findByCustomerId(id);
         return optionalCustomer.orElse(null);
     }
+    @Override
+    public Customer getCustomerFirstName(String name) {
+        return customerRepository.findByFirstName(name);
+    }
 
     @Override
     public List<Customer> getAll() {
-        return null;
+
+        List<Customer> allCustomers = new ArrayList<>();
+        for (Customer customer : customerRepository.findAll()) {
+
+            allCustomers.add(customer);
+        }
+        return allCustomers;
+
     }
 
     @Override
-    public Customer save(Customer customer) {
-        return null;
+    public Customer saveCustomer(Customer customer) {
+        return customerRepository.save(customer);
     }
 
     @Override
-    public Customer update(Customer customer) {
-        return null;
+    public Customer updateCustomer(String id, Customer customer) {
+        customerRepository.deleteById(id);
+        return customerRepository.save(customer);
     }
 
     @Override
-    public void delete(String id) {
-
+    public void deleteCustomerById(String id) {
+        customerRepository.deleteById(id);
     }
 }

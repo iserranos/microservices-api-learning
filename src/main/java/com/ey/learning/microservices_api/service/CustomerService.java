@@ -8,11 +8,13 @@ public interface CustomerService {
 
     Customer getById(String id);
 
+    Customer getCustomerFirstName(String name);
+
     List<Customer> getAll();
 
-    Customer save(Customer customer);
+    Customer saveCustomer(Customer customer);
 
-    Customer update(Customer customer);
+    Customer updateCustomer(String id, Customer customer);
 
-    void delete(String id);
+    void deleteCustomerById(String id);
 }
