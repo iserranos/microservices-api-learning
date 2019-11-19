@@ -1,9 +1,7 @@
 package com.ey.learning.microservices_api.model;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
-import org.springframework.hateoas.ResourceSupport;
 
 
 @Data
