@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionController {
 /*
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<Object> exception(Exception exception) {
-        System.out.println("ERROR :" +exception);
+    public ResponseEntity<Object> exception(NullPointerException exception) {
+        System.out.println("Revisa los campos :" +exception);
         return null;
-    }*/
-
+    }
+*/
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity formatException(MethodArgumentNotValidException exception) {
         System.out.println("Argumento no válido: " + exception);

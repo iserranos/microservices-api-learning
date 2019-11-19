@@ -31,6 +31,7 @@ public class AuthController {
     public ResponseEntity<String> auth(@RequestBody UserPasswordAuth userPasswordAuth) {
 
         String token = authService.addToken(userPasswordAuth);
+
         if (token != null) {
             return new ResponseEntity<>(token, HttpStatus.OK);
         } else {
