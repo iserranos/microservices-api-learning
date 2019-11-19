@@ -9,14 +9,14 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/api/customers", produces = {"application/json"}, path = "/api/customers")
+@RequestMapping(value ="/api/v0/customers", produces = {"application/json"}, path = "/api/v0/customers")
 public class CustomerController {
 
     @Autowired
     private   CustomerServiceImpl customerServiceImpl;
 
 
-    @GetMapping(value = "/all")
+    @GetMapping
     public List<Customer> getCustomers() {
         List<Customer> customers =customerServiceImpl.getAll();
 
@@ -36,7 +36,7 @@ public class CustomerController {
 
 
 
-    @GetMapping
+    @GetMapping(params = "name")
     public Customer getCustomerByFirstName(@RequestParam("name") String name) {
         Customer customer = customerServiceImpl.getCustomerFirstName(name);
         return customer;

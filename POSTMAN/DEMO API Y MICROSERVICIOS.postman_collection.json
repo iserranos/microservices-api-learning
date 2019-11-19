@@ -1,0 +1,404 @@
+{
+	"info": {
+		"_postman_id": "5a0363a8-7db4-49a8-bc06-bc990d0d810a",
+		"name": "DEMO API Y MICROSERVICIOS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "VALIDATE TOKEN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"token\": \"{{serviceToken}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:8443/api/v0/auth/validate",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8443",
+							"path": [
+								"api",
+								"v0",
+								"auth",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "227cd830-234f-49cf-b803-c23c2e1ccdd8",
+								"exec": [
+									"let defaultResponse = pm.response.json();\r",
+									"pm.globals.set(\"serviceToken\", defaultResponse.token);\r",
+									"pm.globals.set(\"serviceRefreshToken\", defaultResponse.refreshToken);  \r",
+									" \r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"demo\",\n    \"password\": \"!p@s5w0r?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:8443/api/v0/auth",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8443",
+							"path": [
+								"api",
+								"v0",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "GET ALL",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{serviceToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:8443/api/v0/customers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"v0",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/v0/customers/{id}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"v0",
+						"customers",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY NAME",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/v0/customers?name=Paco",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"v0",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Paco"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE BY ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"firstName\": \"Juan\",\r\n        \"lastName\": \"Prieto\",\r\n        \"company\": \"EY\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/v0/customers/{id}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"v0",
+						"customers",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST CREATE ONE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Paco\",\r\n    \"lastName\": \"Pérez\",\r\n    \"company\": \"BBVO\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/v0/customers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"v0",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE BY NAME",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"firstName\": \"Juan\",\r\n        \"lastName\": \"Prieto\",\r\n        \"company\": \"EY\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/v0/customers?name=Juan",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"v0",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Juan"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"firstName\": \"Juan\",\r\n        \"lastName\": \"Prieto\",\r\n        \"company\": \"EY\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/customers/{id}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"customers",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "50c4447a-4fe8-4e8e-a27a-907feffca602",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "09ce38c2-b198-436c-9d3e-b860e8aff568",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
