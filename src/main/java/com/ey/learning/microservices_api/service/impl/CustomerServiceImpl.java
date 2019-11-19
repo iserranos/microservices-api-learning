@@ -3,11 +3,8 @@ package com.ey.learning.microservices_api.service.impl;
 import com.ey.learning.microservices_api.model.Customer;
 import com.ey.learning.microservices_api.repository.CustomerRepository;
 import com.ey.learning.microservices_api.service.CustomerService;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +61,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteCustomerByName(String name) {
-
         Customer customer = customerRepository.findByFirstName(name);
             customerRepository.delete(customer);
     }
