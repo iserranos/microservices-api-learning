@@ -1,7 +1,6 @@
 package com.ey.learning.microservices_api.filter;
 
 import com.ey.learning.microservices_api.service.impl.AuthServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;

@@ -5,6 +5,7 @@ import com.ey.learning.microservices_api.repository.CustomerRepository;
 import com.ey.learning.microservices_api.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    private  CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository) {
@@ -25,6 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
         return optionalCustomer.orElse(null);
     }
+
     @Override
     public Customer getCustomerFirstName(String name) {
         return customerRepository.findByFirstName(name);
@@ -33,14 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getAll() {
-
-        List<Customer> allCustomers = new ArrayList<>();
-        for (Customer customer : customerRepository.findAll()) {
-
-            allCustomers.add(customer);
-        }
-        return allCustomers;
-
+        return new ArrayList<>(customerRepository.findAll());
     }
 
     @Override
@@ -62,6 +57,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomerByName(String name) {
         Customer customer = customerRepository.findByFirstName(name);
-            customerRepository.delete(customer);
+        customerRepository.delete(customer);
     }
 }

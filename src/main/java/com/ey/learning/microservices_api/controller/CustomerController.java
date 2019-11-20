@@ -3,53 +3,47 @@ package com.ey.learning.microservices_api.controller;
 import com.ey.learning.microservices_api.model.Customer;
 import com.ey.learning.microservices_api.service.impl.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.MediaTypes;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
 @RestController
-@RequestMapping(value ="/api/v0/customers", produces = {"application/json"}, path = "/api/v0/customers")
+@RequestMapping(value = "/api/v0/customers", produces = {"application/json"}, path = "/api/v0/customers")
 public class CustomerController {
 
+    private final CustomerServiceImpl customerServiceImpl;
+
     @Autowired
-    private   CustomerServiceImpl customerServiceImpl;
+    public CustomerController(CustomerServiceImpl customerServiceImpl) {
+        this.customerServiceImpl = customerServiceImpl;
+    }
 
 
     @GetMapping
     public List<Customer> getCustomers() {
-        List<Customer> customers =customerServiceImpl.getAll();
-
-        return  customers;
+        return customerServiceImpl.getAll();
     }
 
 
-
-    @GetMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
-    public  Customer getCustomerById(@PathVariable("id") String id) {
-        Customer customer = customerServiceImpl.getById(id);
-
-
-        return customer;
+    @GetMapping(value = "/{id}")
+    public Customer getCustomerById(@PathVariable("id") String id) {
+        return customerServiceImpl.getById(id);
     }
-
-
 
 
     @GetMapping(params = "name")
     public Customer getCustomerByFirstName(@RequestParam("name") String name) {
-        Customer customer = customerServiceImpl.getCustomerFirstName(name);
-        return customer;
+        return customerServiceImpl.getCustomerFirstName(name);
     }
 
     @PutMapping("/{id}")
     public Customer updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
-
-        return customerServiceImpl.updateCustomer(id,customer);
+        return customerServiceImpl.updateCustomer(id, customer);
     }
 
     @PostMapping
-    public Customer saveNewCustomer(@RequestBody Customer customer){
+    public Customer saveNewCustomer(@RequestBody Customer customer) {
         return customerServiceImpl.saveCustomer(customer);
     }
 
@@ -58,7 +52,7 @@ public class CustomerController {
         customerServiceImpl.deleteCustomerById(id);
     }
 
-    @DeleteMapping
+    @DeleteMapping(params = "name")
     public void deleteCustomerByName(@RequestParam("name") String name) {
         customerServiceImpl.deleteCustomerByName(name);
     }

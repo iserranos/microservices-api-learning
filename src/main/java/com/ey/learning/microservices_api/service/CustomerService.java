@@ -3,12 +3,10 @@ package com.ey.learning.microservices_api.service;
 import com.ey.learning.microservices_api.model.Customer;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CustomerService {
 
-     Customer getById(String id);
-
+    Customer getById(String id);
 
     Customer getCustomerFirstName(String name);
 

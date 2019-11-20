@@ -3,7 +3,6 @@ package com.ey.learning.microservices_api.model;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
-
 @Data
 public class Customer {
     @Id
@@ -18,9 +17,6 @@ public class Customer {
         this.company = company;
     }
 
-    public Customer() {
-
-    }
 
     @Override
     public String toString() {
